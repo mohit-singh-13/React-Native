@@ -1,6 +1,14 @@
 // import { StatusBar } from 'expo-status-bar';
 import { useState } from "react";
-import { Button, StyleSheet, Text, TextInput, View } from "react-native";
+import {
+  Button,
+  FlatList,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
+} from "react-native";
 
 export default function App() {
   const [userInput, setUserInput] = useState("");
@@ -66,22 +74,45 @@ export default function App() {
         <Button title="Add Goal" onPress={addGoalHandler} />
       </View>
       <View style={{ flex: 6 }}>
-        {goals.map((goal, index) => (
-          <Text
-            key={index}
-            style={{
-              fontSize: 16,
-              padding: 8,
-              margin: 8,
-              backgroundColor: "#5e0acc",
-              color: "white",
-              borderRadius: 8,
-            }}
-          >
-            {goal}
-          </Text>
-        ))}
+        {/* <ScrollView>
+          {goals.map((goal, index) => (
+            <Text
+              key={index}
+              style={{
+                fontSize: 16,
+                padding: 8,
+                margin: 8,
+                backgroundColor: "#5e0acc",
+                color: "white",
+                borderRadius: 8,
+              }}
+            >
+              {goal}
+            </Text>
+          ))} */}
         {/* <Text>List of goals...</Text> */}
+        {/* </ScrollView> */}
+
+        <FlatList
+          data={goals}
+          renderItem={(itemData) => {
+            return (
+              <Text
+                key={itemData.index}
+                style={{
+                  fontSize: 16,
+                  padding: 8,
+                  margin: 8,
+                  backgroundColor: "#5e0acc",
+                  color: "white",
+                  borderRadius: 8,
+                }}
+              >
+                {itemData.item}
+              </Text>
+            );
+          }}
+        />
       </View>
     </View>
   );
