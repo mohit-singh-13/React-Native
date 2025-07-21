@@ -4,7 +4,8 @@ import { StatusBar } from "expo-status-bar";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import MealsOverviewScreen from "./screens/MealsOverviewScreen";
-import { CATEGORIES } from "./data/dummy-data";
+// import { CATEGORIES } from "./data/dummy-data";
+import MealDetails from "./screens/MealDetailsScreen";
 
 const NavigationStack = createNativeStackNavigator();
 
@@ -41,6 +42,16 @@ export default function App() {
             //   );
 
             //   return { title: category.title };
+            // }}
+          />
+
+          <NavigationStack.Screen
+            name="MealDetails"
+            component={MealDetails}
+            // options={{
+            //   headerRight: () => {
+            //     return <Button title="Fav" />
+            //   },
             // }}
           />
         </NavigationStack.Navigator>

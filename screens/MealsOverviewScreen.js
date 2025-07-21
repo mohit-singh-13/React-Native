@@ -18,6 +18,10 @@ const MealsOverviewScreen = ({ route, navigation }) => {
     navigation.setOptions({ title: categoryTitle });
   }, [categoryId, navigation]);
 
+  function pressHandler(id, title) {
+    navigation.navigate("MealDetails", { mealId: id, mealTitle: title });
+  }
+
   function renderMealItem(itemData) {
     const { title, imageUrl, duration, complexity, affordability } =
       itemData.item;
@@ -29,6 +33,7 @@ const MealsOverviewScreen = ({ route, navigation }) => {
         duration={duration}
         complexity={complexity}
         affordability={affordability}
+        onPress={pressHandler.bind(this, itemData.item.id, title)}
       />
     );
   }
