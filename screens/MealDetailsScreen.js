@@ -7,11 +7,18 @@ import {
   View,
 } from "react-native";
 import { MEALS } from "../data/dummy-data";
-import { useContext, useLayoutEffect } from "react";
-import { FavouritesContext } from "../store/context/favourites-context";
+import { useLayoutEffect } from "react";
+// import { FavouritesContext } from "../store/context/favourites-context";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  addFavourite,
+  removeFavourite,
+} from "../store/redux/slices/favouriteSlice";
 
 const MealDetailsScreen = ({ route, navigation }) => {
-  const { ids, addFavourite, removeFavourite } = useContext(FavouritesContext);
+  // const { ids, addFavourite, removeFavourite } = useContext(FavouritesContext);
+  const { ids } = useSelector((state) => state.favouriteMeals);
+  const dispatch = useDispatch();
 
   const { mealId, mealTitle } = route.params;
 
@@ -19,9 +26,11 @@ const MealDetailsScreen = ({ route, navigation }) => {
 
   function changeFavouriteStatusHandler() {
     if (isMealFavourite) {
-      removeFavourite(mealId);
+      // removeFavourite(mealId);
+      dispatch(removeFavourite({ id: mealId }));
     } else {
-      addFavourite(mealId);
+      // addFavourite(mealId);
+      dispatch(addFavourite({ id: mealId }));
     }
   }
 
