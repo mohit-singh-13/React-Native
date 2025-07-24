@@ -7,19 +7,36 @@ import {
   View,
 } from "react-native";
 import { MEALS } from "../data/dummy-data";
-import { useLayoutEffect } from "react";
+import { useContext, useLayoutEffect } from "react";
+import { FavouritesContext } from "../store/context/favourites-context";
 
 const MealDetailsScreen = ({ route, navigation }) => {
+  const { ids, addFavourite, removeFavourite } = useContext(FavouritesContext);
+
   const { mealId, mealTitle } = route.params;
+
+  const isMealFavourite = ids.find((id) => id === mealId);
+
+  function changeFavouriteStatusHandler() {
+    if (isMealFavourite) {
+      removeFavourite(mealId);
+    } else {
+      addFavourite(mealId);
+    }
+  }
 
   useLayoutEffect(() => {
     navigation.setOptions({ title: mealTitle });
     navigation.setOptions({
       headerRight: () => {
-        return <Button title="Fav" />;
+        return isMealFavourite ? (
+          <Button title="Remove" onPress={changeFavouriteStatusHandler} />
+        ) : (
+          <Button title="Fav" onPress={changeFavouriteStatusHandler} />
+        );
       },
     });
-  }, []);
+  }, [navigation, changeFavouriteStatusHandler]);
 
   const selectedMeal = MEALS.find((meal) => meal.id === mealId);
 

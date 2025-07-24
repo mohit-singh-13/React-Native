@@ -1,3 +1,4 @@
+import { useRoute } from "@react-navigation/native";
 import { View, Text, Pressable, StyleSheet, Image } from "react-native";
 
 const MealItem = ({
