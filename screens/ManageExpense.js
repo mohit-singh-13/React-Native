@@ -9,6 +9,7 @@ import {
   updateExpense,
 } from "../redux/slices/expensesSlice";
 import ExpenseForm from "../components/ManageExpense/ExpenseForm";
+import { deleteExpenseDB, storeExpense, updateExpenseDB } from "../utils/http";
 
 const ManageExpense = ({ route, navigation }) => {
   const { expenseId } = route.params || {};
@@ -24,8 +25,9 @@ const ManageExpense = ({ route, navigation }) => {
     });
   }, [navigation, isEditing]);
 
-  function deleteExpenseHandler(id) {
+  async function deleteExpenseHandler(id) {
     dispatch(deleteExpense({ id }));
+    await deleteExpenseDB(id);
     navigation.goBack();
   }
 
@@ -33,8 +35,14 @@ const ManageExpense = ({ route, navigation }) => {
     navigation.goBack();
   }
 
-  function confirmHandler({ amount, date, description }) {
+  async function confirmHandler({ amount, date, description }) {
     if (isEditing) {
+      await updateExpenseDB(expenseId, {
+        amount: amount,
+        date: date,
+        description: description,
+      });
+
       dispatch(
         updateExpense({
           id: expenseId,
@@ -44,9 +52,11 @@ const ManageExpense = ({ route, navigation }) => {
         })
       );
     } else {
+      const id = await storeExpense({ description, amount, date });
+
       dispatch(
         addExpense({
-          id: Math.random() * 10000,
+          id,
           description,
           amount,
           date,

@@ -29,7 +29,7 @@ const ExpenseForm = ({ onCancel, isEditing, onSubmit, selectedExpense }) => {
     };
 
     const isAmountValid = !isNaN(expenseData.amount) && expenseData.amount > 0;
-    const isDateValid = expenseData.date.toString() === "Invalid Date";
+    const isDateValid = expenseData.date !== "Invalid Date";
     const isDescriptionValid = expenseData.description.trim().length > 0;
 
     if (!isAmountValid || !isDateValid || !isDescriptionValid) {
