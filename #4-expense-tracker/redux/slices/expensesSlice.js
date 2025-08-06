@@ -1,4 +1,5 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { getExpenses } from "../../utils/http";
 
 const DUMMY_EXPENSES = [
   {
@@ -34,8 +35,17 @@ const DUMMY_EXPENSES = [
 ];
 
 const initialState = {
-  expenses: DUMMY_EXPENSES,
+  expenses: [],
+  loading: true,
 };
+
+export const getExpensesInitially = createAsyncThunk(
+  "expenses/getExpensesInitially",
+  async () => {
+    const response = await getExpenses();
+    return response;
+  }
+);
 
 const expenseSlice = createSlice({
   name: "expenses",
@@ -60,6 +70,19 @@ const expenseSlice = createSlice({
         state.expenses[index] = action.payload;
       }
     },
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(getExpensesInitially.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(getExpensesInitially.fulfilled, (state, action) => {
+        state.expenses = action.payload;
+        state.loading = false;
+      })
+      .addCase(getExpensesInitially.rejected, (state) => {
+        state.loading = false;
+      });
   },
 });
 
