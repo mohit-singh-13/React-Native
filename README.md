@@ -1,8 +1,8 @@
-# React Native Demos í³±
+# React Native Demos ğŸ“±
 
 Welcome to my **React Native** learning repository! This repo is a collection of small demo apps and projects I've built while learning React Native. Each folder contains a self-contained project, focusing on different concepts such as navigation, state management, API integration, Native Features and more.
 
-## íº€ Why this Repository?
+## ğŸš€ Why this Repository?
 
 I'm using this repository to:
 
@@ -12,19 +12,19 @@ I'm using this repository to:
 - Build muscle memory through small apps
 - Track my progress over time
 
-## í·  What You'll Find
+## ğŸ§  What You'll Find
 
 Each subdirectory inside this repo represents a separate demo or mini project. These cover:
 
-- í³± Basic UI layouts
-- í·­ Navigation (React Navigation)
+- ğŸ“± Basic UI layouts
+- ğŸ§­ Navigation (React Navigation)
 - âš™ï¸ State Management (Hooks, Context API, Redux)
-- í¼ API Calls (using Axios or Fetch)
-- í´ Forms and Validation
-- í¾¨ Styling with StyleSheet and custom themes
-- í·© Native features like camera, storage, etc.
+- ğŸŒ API Calls (using Axios or Fetch)
+- ğŸ” Forms and Validation
+- ğŸ¨ Styling with StyleSheet and custom themes
+- ğŸ§© Native features like camera, storage, etc.
 
-## í·‚ï¸ Folder Structure
+## ğŸ—‚ï¸ Folder Structure
 
 ```bash
 React-Native/
@@ -43,14 +43,14 @@ Each folder typically contains:
 - `assets/` â€“ Images and static files
 - `components/`, `screens/`, etc. â€“ As needed
 
-## í» ï¸ Tech Stack
+## ğŸ› ï¸ Tech Stack
 
 - [React Native](https://reactnative.dev/)
 - [Expo](https://expo.dev/)
 - [React Navigation](https://reactnavigation.org/)
 - [Axios](https://axios-http.com/)
 
-## í³¦ Installation
+## ğŸ“¦ Installation
 
 To run any demo locally:
 
@@ -61,7 +61,7 @@ npm install
 npm start
 ```
 
-## í³Œ Notes
+## ğŸ“Œ Notes
 
 - These are **not production-grade** apps â€” they're meant for learning and experimentation.
 - Some projects may have rough edges or incomplete features.
@@ -71,4 +71,4 @@ npm start
 
 Thanks for visiting!
 
-**Happy coding! íº€**
+**Happy coding! ğŸš€**
