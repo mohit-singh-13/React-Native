@@ -6,17 +6,47 @@ import {
   useForegroundPermissions,
   PermissionStatus,
 } from "expo-location";
-import { useState } from "react";
-import { getMapPreview } from "../../utils/location";
-import { useNavigation } from "@react-navigation/native";
+import { useEffect, useMemo, useState } from "react";
+import { getAddress, getMapPreview } from "../../utils/location";
+import { useNavigation, useRoute } from "@react-navigation/native";
 
-const LocationPicker = () => {
-  const navigation = useNavigation();
-
+const LocationPicker = ({ onPickLocation }) => {
   const [pickedLocation, setPickedLocation] = useState();
+
+  const navigation = useNavigation();
+  const route = useRoute();
 
   const [locationPermissionInformation, requestPermission] =
     useForegroundPermissions();
+
+  const mapPickedLocation = useMemo(() => {
+    return (
+      route.params && {
+        lat: route.params.pickedLat,
+        long: route.params.pickedLong,
+      }
+    );
+  }, [route]);
+
+  useEffect(() => {
+    if (mapPickedLocation) {
+      setPickedLocation(mapPickedLocation);
+    }
+  }, [mapPickedLocation]);
+
+  useEffect(() => {
+    const handleLocation = async () => {
+      if (pickedLocation) {
+        const address = await getAddress({
+          lat: pickedLocation.lat,
+          long: pickedLocation.long,
+        });
+        onPickLocation({ ...pickedLocation, address });
+      }
+    };
+
+    handleLocation();
+  }, [onPickLocation, pickedLocation]);
 
   const verifyPermission = async () => {
     if (
@@ -64,8 +94,8 @@ const LocationPicker = () => {
       <Image
         source={{
           uri: getMapPreview({
-            lat: 28.6087507,
-            long: 77.0420428,
+            lat: pickedLocation.lat,
+            long: pickedLocation.long,
           }),
         }}
         style={styles.image}

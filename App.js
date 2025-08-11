@@ -6,6 +6,11 @@ import AddPlace from "./screens/AddPlace";
 import IconButton from "./components/ui/IconButton";
 import { Colors } from "./constants/colors";
 import Map from "./screens/Map";
+import { useEffect } from "react";
+import { init } from "./utils/database";
+import * as SplashScreen from "expo-splash-screen";
+
+SplashScreen.preventAutoHideAsync();
 
 const Stack = createStackNavigator();
 
@@ -48,6 +53,15 @@ const Navigation = () => {
 };
 
 export default function App() {
+  useEffect(() => {
+    const initializeDb = async () => {
+      await init();
+      SplashScreen.hide();
+    };
+
+    initializeDb();
+  }, []);
+
   return (
     <>
       <StatusBar style="auto" />
