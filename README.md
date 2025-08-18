@@ -33,7 +33,7 @@ React-Native/
 ├── #3-meals-app/
 ├── #4-expense-tracker/
 ├── #5-authN-authZ/
-└── ...
+└── #6-image-location-picker/
 ```
 
 Each folder typically contains:
